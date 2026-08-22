@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend
+    uses: ./.github/workflows/backend.yml
+
+  docker:
+    name: Docker
+    uses: ./.github/workflows/docker.yml
+
+  pre-commit:
+    name: Pre-commit
+    uses: ./.github/workflows/pre-commit.yml
+
+  required-checks:
+    name: Required Checks
+    needs:
+      - backend
+      - docker
+      - pre-commit
+
+    if: ${{always()}}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Verify workflows passed
+        env:
+          REQUIRED_JOBS: ${{toJSON(needs)}}
+        run: |
+          jq -e \
+              'to_entries | all(.value.result == "success")'\
+              <<< "${REQUIRED_JOBS}"
