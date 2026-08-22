@@ -1,0 +1,75 @@
+name: Backend
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Backend checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: ragna
+          POSTGRES_USER: ragna
+          POSTGRES_PASSWORD: ragna
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ragna -d ragna"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.ci
+      DJANGO_SECRET_KEY: ci-test-secret-key
+      DJANGO_DEBUG: "false"
+      DATABASE_URL: postgresql://ragna:ragna@127.0.0.1:5432/ragna
+
+    defaults:
+      run:
+        working-directory: api
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        run: pipx install poetry
+        working-directory: .
+
+      - name: Validate Poetry project
+        run: poetry check --lock
+
+      - name: Install backend dependencies
+        run: poetry install --no-interaction
+
+      - name: Run Django system checks
+        run: poetry run python manage.py check
+
+      - name: Check migrations
+        run: poetry run python manage.py makemigrations --check --dry-run
+
+      - name: Run Ruff lint checks
+        run: poetry run ruff check .
+
+      - name: Check Ruff formatting
+        run: poetry run ruff format --check .
+
+      - name: Run mypy
+        run: poetry run mypy .
+
+      - name: Run backend tests
+        run: poetry run pytest

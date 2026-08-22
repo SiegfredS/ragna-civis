@@ -1,0 +1,16 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff check
+        entry: poetry -C api run ruff check --fix .
+        language: system
+        files: ^api/.*\.py$
+        pass_filenames: false
+
+      - id: ruff-format
+        name: Ruff format
+        entry: poetry -C api run ruff format .
+        language: system
+        files: ^api/.*\.py$
+        pass_filenames: false
