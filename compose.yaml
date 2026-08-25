@@ -39,9 +39,18 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/app
+      - web_node_modules:/app/node_modules
 
 
 volumes:
   ragna-postgres-data:
   api-venv-mask:
+  web_node_modules:

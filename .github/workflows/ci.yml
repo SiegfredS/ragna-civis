@@ -21,6 +21,9 @@ jobs:
     name: Backend
     uses: ./.github/workflows/backend.yml
 
+  frontend:
+    name: Frontend
+    uses: ./.github/workflows/frontend.yml
   docker:
     name: Docker
     uses: ./.github/workflows/docker.yml
@@ -33,6 +36,7 @@ jobs:
     name: Required Checks
     needs:
       - backend
+      - frontend
       - docker
       - pre-commit
 
@@ -46,5 +50,5 @@ jobs:
           REQUIRED_JOBS: ${{toJSON(needs)}}
         run: |
           jq -e \
-              'to_entries | all(.value.result == "success")'\
-              <<< "${REQUIRED_JOBS}"
+            'to_entries | all(.value.result == "success")' \
+            <<< "${REQUIRED_JOBS}"
