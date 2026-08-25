@@ -1,6 +1,7 @@
 repos:
   - repo: local
     hooks:
+      # API
       - id: ruff-check
         name: Ruff check
         entry: poetry -C api run ruff check --fix .
@@ -13,4 +14,19 @@ repos:
         entry: poetry -C api run ruff format .
         language: system
         files: ^api/.*\.py$
+        pass_filenames: false
+
+      # Web
+      - id: web-eslint
+        name: Web ESLint
+        entry: pnpm -C web exec eslint . --fix
+        language: system
+        files: ^web/.*\.(js|jsx|ts|tsx)$
+        pass_filenames: false
+
+      - id: web-prettier
+        name: Web Prettier
+        entry: pnpm -C web exec prettier --write .
+        language: system
+        files: ^web/.*\.(js|jsx|ts|tsx|json|css|md)$
         pass_filenames: false
