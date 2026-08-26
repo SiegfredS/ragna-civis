@@ -32,6 +32,7 @@ pytest-django = "^4.11.1"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
+addopts = "--ds=config.settings.test"
 pythonpath = ["."]
 testpaths = ["apps"]
 python_files = ["test_*.py", "*_test.py", "tests.py"]
