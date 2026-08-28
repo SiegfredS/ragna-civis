@@ -47,6 +47,9 @@ DEFAULT_APPS = [
 LOCAL_APPS = [
     "apps.users",
     "apps.profiles",
+    "apps.organizations",
+    "apps.governance",
+    "apps.projects",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS

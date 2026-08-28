@@ -12,3 +12,6 @@ class UserProfile(TimeStampedModel):
     class Meta(TimeStampedModel.Meta):
         verbose_name = _("User Profile")
         verbose_name_plural = _("User Profiles")
+
+    def __str__(self) -> str:
+        return str(self.user)
