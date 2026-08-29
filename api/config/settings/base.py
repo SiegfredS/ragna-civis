@@ -50,6 +50,8 @@ LOCAL_APPS = [
     "apps.organizations",
     "apps.governance",
     "apps.projects",
+    # for management commands
+    "apps.utils",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS

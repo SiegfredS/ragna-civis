@@ -1,0 +1,693 @@
+{
+  "users": [
+    {
+      "username": "ningguang",
+      "email": "ningguang@liyue.com",
+      "first_name": "Ningguang",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "keqing",
+      "email": "keqing@liyue.com",
+      "first_name": "Keqing",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "ganyu",
+      "email": "ganyu@liyue.com",
+      "first_name": "Ganyu",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "jean",
+      "email": "jean@mondstadt.com",
+      "first_name": "Jean",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "kaeya",
+      "email": "kaeya@mondstadt.com",
+      "first_name": "Kaeya",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "amber",
+      "email": "amber@mondstadt.com",
+      "first_name": "Amber",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "james_gordon",
+      "email": "james.gordon@gotham.com",
+      "first_name": "James",
+      "middle_name": "",
+      "last_name": "Gordon"
+    },
+    {
+      "username": "bruce_wayne",
+      "email": "bruce.wayne@gotham.com",
+      "first_name": "Bruce",
+      "middle_name": "",
+      "last_name": "Wayne"
+    },
+    {
+      "username": "clark_kent",
+      "email": "clark.kent@metropolis.com",
+      "first_name": "Clark",
+      "middle_name": "",
+      "last_name": "Kent"
+    },
+    {
+      "username": "victor_von_doom",
+      "email": "victor.von.doom@latveria.com",
+      "first_name": "Victor",
+      "middle_name": "von",
+      "last_name": "Doom"
+    },
+    {
+      "username": "mira_solen",
+      "email": "mira.solen@liyue.com",
+      "first_name": "Mira",
+      "middle_name": "",
+      "last_name": "Solen"
+    },
+    {
+      "username": "rowan_sable",
+      "email": "rowan.sable@gotham.com",
+      "first_name": "Rowan",
+      "middle_name": "",
+      "last_name": "Sable"
+    },
+    {
+      "username": "sana_iver",
+      "email": "sana.iver@gotham.com",
+      "first_name": "Sana",
+      "middle_name": "",
+      "last_name": "Iver"
+    },
+    {
+      "username": "irena_varek",
+      "email": "irena.varek@latveria.com",
+      "first_name": "Irena",
+      "middle_name": "",
+      "last_name": "Varek"
+    }
+  ],
+  "organizations": [
+    {
+      "name": "Liyue Qixing",
+      "slug": "liyue-qixing",
+      "description": "A compact Ragna Civis governance example using a recognizable Liyue institution.",
+      "organization_type": "government_unit"
+    },
+    {
+      "name": "Liyue Harbor Commerce Council",
+      "slug": "liyue-harbor-commerce-council",
+      "description": "An original civic-commercial forum for harbor businesses and public-realm coordination.",
+      "organization_type": "civic_organization"
+    },
+    {
+      "name": "Minlin Conservation Authority",
+      "slug": "minlin-conservation-authority",
+      "description": "An original organization for conservation and resilient access routes.",
+      "organization_type": "non_government_organization"
+    },
+    {
+      "name": "Chihu Rock Merchants Cooperative",
+      "slug": "chihu-rock-merchants-cooperative",
+      "description": "An original cooperative for small traders and market operators.",
+      "organization_type": "civic_organization"
+    },
+    {
+      "name": "Knights of Favonius",
+      "slug": "knights-of-favonius",
+      "description": "A recognizable Mondstadt institution used as the governing organization for this simplified demo.",
+      "organization_type": "government_unit"
+    },
+    {
+      "name": "Mondstadt Civic Services Office",
+      "slug": "mondstadt-civic-services-office",
+      "description": "An original public-service office for maintenance and shared infrastructure.",
+      "organization_type": "government_agency",
+      "parent": "knights-of-favonius"
+    },
+    {
+      "name": "Springvale Residents Association",
+      "slug": "springvale-residents-association",
+      "description": "An original community group for neighborhood service planning.",
+      "organization_type": "community_group"
+    },
+    {
+      "name": "Gotham City Government",
+      "slug": "gotham-city-government",
+      "description": "A metropolitan government for dense urban services and district representation.",
+      "organization_type": "government_unit"
+    },
+    {
+      "name": "Gotham Department of Public Works",
+      "slug": "gotham-department-of-public-works",
+      "description": "A city department for transport and streetlight programs.",
+      "organization_type": "government_agency",
+      "parent": "gotham-city-government"
+    },
+    {
+      "name": "Gotham Waterfront Authority",
+      "slug": "gotham-waterfront-authority",
+      "description": "A public agency for riverfront recovery and resilience.",
+      "organization_type": "government_agency",
+      "parent": "gotham-city-government"
+    },
+    {
+      "name": "Narrows Residents Association",
+      "slug": "narrows-residents-association",
+      "description": "An original community association for transit and neighborhood renewal.",
+      "organization_type": "community_group"
+    },
+    {
+      "name": "Gotham Small Business Council",
+      "slug": "gotham-small-business-council",
+      "description": "An original civic business council for neighborhood enterprises.",
+      "organization_type": "civic_organization"
+    },
+    {
+      "name": "Wayne Foundation",
+      "slug": "wayne-foundation",
+      "description": "A recognizable Gotham organization used only for original civic-partnership demo projects.",
+      "organization_type": "other"
+    },
+    {
+      "name": "Metropolis City Government",
+      "slug": "metropolis-city-government",
+      "description": "A modern municipal-government example for transit and open-data projects.",
+      "organization_type": "government_unit"
+    },
+    {
+      "name": "Daily Planet",
+      "slug": "daily-planet",
+      "description": "A recognizable Metropolis organization represented as an external civic-information stakeholder.",
+      "organization_type": "other"
+    },
+    {
+      "name": "Latverian Central Government",
+      "slug": "latverian-central-government",
+      "description": "A centralized national administration for ministry-led programs.",
+      "organization_type": "government_unit"
+    },
+    {
+      "name": "Latverian Ministry of Infrastructure",
+      "slug": "latverian-ministry-of-infrastructure",
+      "description": "An original ministry-level organization for transport and waterworks programs.",
+      "organization_type": "government_agency",
+      "parent": "latverian-central-government"
+    },
+    {
+      "name": "Doomstadt Municipal Office",
+      "slug": "doomstadt-municipal-office",
+      "description": "An original municipal-service office in the centralized example.",
+      "organization_type": "government_unit",
+      "parent": "latverian-central-government"
+    }
+  ],
+  "organization_memberships": [
+    {
+      "organization": "liyue-qixing",
+      "user": "ningguang",
+      "role": "admin"
+    },
+    {
+      "organization": "liyue-qixing",
+      "user": "keqing",
+      "role": "member"
+    },
+    {
+      "organization": "liyue-qixing",
+      "user": "ganyu",
+      "role": "member"
+    },
+    {
+      "organization": "minlin-conservation-authority",
+      "user": "mira_solen",
+      "role": "admin"
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "user": "mira_solen",
+      "role": "admin"
+    },
+    {
+      "organization": "chihu-rock-merchants-cooperative",
+      "user": "mira_solen",
+      "role": "member"
+    },
+    {
+      "organization": "knights-of-favonius",
+      "user": "jean",
+      "role": "admin"
+    },
+    {
+      "organization": "knights-of-favonius",
+      "user": "kaeya",
+      "role": "member"
+    },
+    {
+      "organization": "knights-of-favonius",
+      "user": "amber",
+      "role": "member"
+    },
+    {
+      "organization": "narrows-residents-association",
+      "user": "rowan_sable",
+      "role": "admin"
+    },
+    {
+      "organization": "gotham-city-government",
+      "user": "rowan_sable",
+      "role": "member"
+    },
+    {
+      "organization": "gotham-small-business-council",
+      "user": "rowan_sable",
+      "role": "member"
+    },
+    {
+      "organization": "gotham-city-government",
+      "user": "james_gordon",
+      "role": "admin"
+    },
+    {
+      "organization": "gotham-department-of-public-works",
+      "user": "james_gordon",
+      "role": "member"
+    },
+    {
+      "organization": "wayne-foundation",
+      "user": "bruce_wayne",
+      "role": "admin"
+    },
+    {
+      "organization": "gotham-small-business-council",
+      "user": "bruce_wayne",
+      "role": "member"
+    },
+    {
+      "organization": "daily-planet",
+      "user": "clark_kent",
+      "role": "member"
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "user": "sana_iver",
+      "role": "admin"
+    },
+    {
+      "organization": "latverian-central-government",
+      "user": "victor_von_doom",
+      "role": "admin"
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "user": "victor_von_doom",
+      "role": "member"
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "user": "irena_varek",
+      "role": "admin"
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "user": "irena_varek",
+      "role": "admin"
+    }
+  ],
+  "governance_bodies": [
+    {
+      "organization": "liyue-qixing",
+      "name": "Liyue Qixing Council",
+      "description": "A simplified governance-body representation of the Qixing.",
+      "body_type": "council"
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "name": "Liyue Harbor Advisory Board",
+      "description": "An original advisory body for market access and harbor operations.",
+      "body_type": "advisory"
+    },
+    {
+      "organization": "knights-of-favonius",
+      "name": "Knights of Favonius Command Council",
+      "description": "A simplified governance body for recognizable Knights leadership titles.",
+      "body_type": "council"
+    },
+    {
+      "organization": "gotham-city-government",
+      "name": "Gotham City Council",
+      "description": "A metropolitan body for district representation and infrastructure oversight.",
+      "body_type": "council"
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "name": "Gotham Waterfront Steering Committee",
+      "description": "An original committee for river recovery and waterfront resilience.",
+      "body_type": "committee"
+    },
+    {
+      "organization": "latverian-central-government",
+      "name": "Latverian Central Council",
+      "description": "A simplified central governance body for the Latverian hierarchy.",
+      "body_type": "council"
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "name": "Latverian Infrastructure Council",
+      "description": "An original ministry-led council for infrastructure oversight.",
+      "body_type": "council"
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "name": "Doomstadt Municipal Council",
+      "description": "An original local council for service coordination.",
+      "body_type": "council"
+    }
+  ],
+  "governance_positions": [
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "Tianquan",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "Yuheng",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "General Secretary",
+      "description": "A simplified representation of Ganyu's secretary role supporting the Qixing."
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "governance_body": "Liyue Harbor Advisory Board",
+      "name": "Market Coordination Chair",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Acting Grand Master",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Cavalry Captain",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Outrider",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "name": "Mayor",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "name": "Police Commissioner",
+      "description": "Canonical occupation placed here only as a model simplification."
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "governance_body": "Gotham Waterfront Steering Committee",
+      "name": "Waterfront Resilience Chair",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "latverian-central-government",
+      "governance_body": "Latverian Central Council",
+      "name": "Head of State",
+      "description": "A simplified position for Latveria's canonical ruler."
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "governance_body": "Latverian Infrastructure Council",
+      "name": "Infrastructure Commissioner",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "governance_body": "Doomstadt Municipal Council",
+      "name": "Municipal Administrator",
+      "description": "An original Ragna Civis role."
+    }
+  ],
+  "governance_position_assignments": [
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "Tianquan",
+      "user": "ningguang",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "Yuheng",
+      "user": "keqing",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "General Secretary",
+      "user": "ganyu",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "governance_body": "Liyue Harbor Advisory Board",
+      "position": "Market Coordination Chair",
+      "user": "mira_solen",
+      "start_date": "2025-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Acting Grand Master",
+      "user": "jean",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Cavalry Captain",
+      "user": "kaeya",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Outrider",
+      "user": "amber",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "position": "Mayor",
+      "user": "rowan_sable",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "position": "Police Commissioner",
+      "user": "james_gordon",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "governance_body": "Gotham Waterfront Steering Committee",
+      "position": "Waterfront Resilience Chair",
+      "user": "sana_iver",
+      "start_date": "2025-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-central-government",
+      "governance_body": "Latverian Central Council",
+      "position": "Head of State",
+      "user": "victor_von_doom",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "governance_body": "Latverian Infrastructure Council",
+      "position": "Infrastructure Commissioner",
+      "user": "irena_varek",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "governance_body": "Doomstadt Municipal Council",
+      "position": "Municipal Administrator",
+      "user": "irena_varek",
+      "start_date": "2025-01-01",
+      "end_date": null
+    }
+  ],
+  "projects": [
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "title": "Liyue Harbor Market Modernization",
+      "slug": "liyue-harbor-market-modernization",
+      "description": "An original market-access and public-space modernization program.",
+      "status": "active",
+      "start_date": "2025-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "minlin-conservation-authority",
+      "title": "Minlin Mountain Road Rehabilitation",
+      "slug": "minlin-mountain-road-rehabilitation",
+      "description": "An original conservation-informed rehabilitation project.",
+      "status": "planned",
+      "start_date": "2026-04-01",
+      "end_date": null
+    },
+    {
+      "organization": "chihu-rock-merchants-cooperative",
+      "title": "Chihu Rock Public Market Renewal",
+      "slug": "chihu-rock-public-market-renewal",
+      "description": "A completed original pilot for market access and shared facilities.",
+      "status": "completed",
+      "start_date": "2024-03-01",
+      "end_date": "2025-01-31"
+    },
+    {
+      "organization": "mondstadt-civic-services-office",
+      "title": "Springvale Waterworks Rehabilitation",
+      "slug": "springvale-waterworks-rehabilitation",
+      "description": "An original waterworks renewal program shaped by resident feedback.",
+      "status": "active",
+      "start_date": "2025-06-01",
+      "end_date": null
+    },
+    {
+      "organization": "mondstadt-civic-services-office",
+      "title": "Mondstadt Community Services Renewal",
+      "slug": "mondstadt-community-services-renewal",
+      "description": "An original program improving access to shared civic services.",
+      "status": "planned",
+      "start_date": "2026-05-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-department-of-public-works",
+      "title": "Narrows Transit Rehabilitation",
+      "slug": "narrows-transit-rehabilitation",
+      "description": "An original phased repair and accessibility program.",
+      "status": "active",
+      "start_date": "2025-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "title": "Gotham River Cleanup Program",
+      "slug": "gotham-river-cleanup-program",
+      "description": "An original river cleanup and public-waterfront recovery program.",
+      "status": "planned",
+      "start_date": "2026-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-department-of-public-works",
+      "title": "Old Gotham Streetlight Modernization",
+      "slug": "old-gotham-streetlight-modernization",
+      "description": "An original streetlight reliability and pedestrian-safety project.",
+      "status": "active",
+      "start_date": "2025-04-15",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "title": "Doomstadt Rail Expansion",
+      "slug": "doomstadt-rail-expansion",
+      "description": "An original ministry-led rail-capacity project.",
+      "status": "active",
+      "start_date": "2025-01-15",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-central-government",
+      "title": "Latverian National Records Modernization",
+      "slug": "latverian-national-records-modernization",
+      "description": "An original program improving records access and request processing.",
+      "status": "planned",
+      "start_date": "2026-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "title": "Doomstadt Waterworks Rehabilitation",
+      "slug": "doomstadt-waterworks-rehabilitation",
+      "description": "An original municipal waterworks rehabilitation project.",
+      "status": "planned",
+      "start_date": "2026-06-01",
+      "end_date": null
+    },
+    {
+      "organization": "wayne-foundation",
+      "title": "Gotham Community Lighting Partnership",
+      "slug": "gotham-community-lighting-partnership",
+      "description": "An original community-safety lighting partnership for neighborhood routes.",
+      "status": "active",
+      "start_date": "2025-05-01",
+      "end_date": null
+    },
+    {
+      "organization": "metropolis-city-government",
+      "title": "Metropolis Public Transit Modernization",
+      "slug": "metropolis-public-transit-modernization",
+      "description": "An original modernization program for accessible public transit service.",
+      "status": "active",
+      "start_date": "2025-07-01",
+      "end_date": null
+    },
+    {
+      "organization": "metropolis-city-government",
+      "title": "Metropolis Open Civic Data Initiative",
+      "slug": "metropolis-open-civic-data-initiative",
+      "description": "An original initiative for clear public datasets and service-status reporting.",
+      "status": "planned",
+      "start_date": "2026-03-01",
+      "end_date": null
+    }
+  ]
+}
