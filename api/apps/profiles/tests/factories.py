@@ -8,5 +8,6 @@ from apps.users.tests.factories import UserFactory
 class UserProfileFactory(DjangoModelFactory):
     class Meta:  # pyright: ignore[reportIncompatibleVariableOverride]
         model = UserProfile
+        django_get_or_create = ("user",)
 
     user = SubFactory(UserFactory)

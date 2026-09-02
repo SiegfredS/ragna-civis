@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "email": "admin@ragna-civis.local",
+      "first_name": "Ragna",
+      "middle_name": "",
+      "last_name": "Admin",
+      "password": "admin",
+      "is_staff": true,
+      "is_superuser": true
+    }
+  ]
+}
