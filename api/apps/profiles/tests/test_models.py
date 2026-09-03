@@ -1,6 +1,7 @@
 import pytest
 
 from apps.profiles.models import UserProfile
+from apps.users.tests.factories import UserFactory
 
 
 @pytest.mark.django_db
@@ -23,3 +24,17 @@ class TestUserProfileModel:
         user.delete()
 
         assert not UserProfile.objects.filter(pk=profile_id).exists()
+
+    def test_read_permission_allows_authenticated_users(self, user_profile, http_request):
+        http_request.user = user_profile.user
+
+        assert user_profile.has_read_permission(http_request)
+
+    def test_object_read_permission_allows_only_the_profile_user(self, user_profile, http_request):
+        http_request.user = user_profile.user
+
+        assert user_profile.has_object_read_permission(http_request)
+
+        http_request.user = UserFactory()
+
+        assert not user_profile.has_object_read_permission(http_request)

@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Ragna Civis Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Ragna Civis web application is a React 19 and TypeScript single-page application built with Vite, Tailwind CSS, and TanStack Router.
 
-Currently, two official plugins are available:
+## Configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Copy the environment example before starting the application:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+cp .env.example .env
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+`VITE_API_BASE_URL` is the browser-visible base URL for the Django API. Its local development default is `http://localhost:8000`. Do not store secrets in `VITE_` variables.
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+## Run with Docker Compose
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+From the repository root:
+
+```bash
+cp web/.env.example web/.env
+docker compose up --build web
 ```
+
+The application is served at `http://localhost:3000`.
+
+## Run without Docker
+
+Use pnpm 10.4.1 and Node 22:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+## Validation
+
+```bash
+pnpm lint
+pnpm format:check
+pnpm build
+```
+
+## Refresh dependencies in Docker
+
+Docker Compose mounts a named `web_node_modules` volume over `/app/node_modules`. If a dependency was added or updated, refresh that volume from the current lockfile:
+
+```bash
+docker compose exec web pnpm install --frozen-lockfile
+docker compose restart web
+```
+
+A rebuild by itself does not update an existing named dependency volume.
