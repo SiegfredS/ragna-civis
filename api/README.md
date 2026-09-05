@@ -22,6 +22,8 @@ The API runs at `http://localhost:8000`; `GET /health/` returns the health respo
 docker compose exec api python manage.py migrate
 ```
 
+`CORS_ALLOWED_ORIGINS` controls browser origins permitted to call the API. The Compose development default permits the web application at `http://localhost:3000`; configure production origins explicitly.
+
 Stop the local stack with `docker compose down`. PostgreSQL data is stored in the named `ragna-postgres-data` volume.
 
 ## Backend checks

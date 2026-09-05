@@ -15,3 +15,10 @@ class UserProfile(TimeStampedModel):
 
     def __str__(self) -> str:
         return str(self.user)
+
+    @staticmethod
+    def has_read_permission(request):
+        return request.user.is_authenticated
+
+    def has_object_read_permission(self, request):
+        return self.user.id == request.user.id

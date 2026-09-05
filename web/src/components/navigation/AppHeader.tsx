@@ -1,8 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Link } from "@tanstack/react-router";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 
+import {
+  ApiError,
+  authKeys,
+  getApiErrorMessage,
+  getStoredAuthToken,
+  logoutMutationOptions,
+  meQueryOptions,
+  removeStoredAuthToken,
+} from "@/api/auth";
+import { queryClient } from "@/api/queryClient";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -13,7 +25,36 @@ import {
 import { navigationItems } from "@/navigation";
 
 export function AppHeader() {
+  const router = useRouter();
+  // Re-read the stored token when navigation follows a successful login.
+  useLocation({ select: (location) => location.href });
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+  const token = getStoredAuthToken();
+  const { data: me, error } = useQuery({
+    ...meQueryOptions(),
+    enabled: Boolean(token),
+  });
+  const logoutMutation = useMutation(logoutMutationOptions());
+  const isUnauthorized = error instanceof ApiError && error.status === 401;
+
+  useEffect(() => {
+    if (isUnauthorized) {
+      queryClient.removeQueries({ queryKey: authKeys.me() });
+    }
+  }, [isUnauthorized]);
+
+  async function handleLogout() {
+    logoutMutation.reset();
+
+    try {
+      await logoutMutation.mutateAsync();
+      removeStoredAuthToken();
+      queryClient.removeQueries({ queryKey: authKeys.me() });
+      await router.navigate({ to: "/" });
+    } catch {
+      // Keep the token and authenticated query state so the user can retry.
+    }
+  }
 
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center border-b bg-background px-4">
@@ -54,6 +95,40 @@ export function AppHeader() {
       <Link to="/" className="font-semibold tracking-tight">
         Ragna Civis
       </Link>
+
+      <div className="ml-auto flex items-center gap-3">
+        {logoutMutation.error && (
+          <p className="text-sm text-destructive" role="alert">
+            {getApiErrorMessage(logoutMutation.error)}
+          </p>
+        )}
+
+        {me ? (
+          <>
+            <p className="text-sm text-muted-foreground">Hi {me.username}</p>
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              disabled={logoutMutation.isPending}
+              onClick={handleLogout}
+            >
+              {logoutMutation.isPending ? "Logging out…" : "Log out"}
+            </Button>
+          </>
+        ) : token ? (
+          <span className="text-sm text-muted-foreground" aria-live="polite">
+            Checking session…
+          </span>
+        ) : (
+          <Link
+            to="/login"
+            className={buttonVariants({ size: "sm", variant: "outline" })}
+          >
+            Sign in
+          </Link>
+        )}
+      </div>
     </header>
   );
 }

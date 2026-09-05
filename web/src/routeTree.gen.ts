@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsIndexRouteImport } from './routes/analytics/index'
 import { Route as GovernanceIndexRouteImport } from './routes/governance/index'
+import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -33,6 +34,11 @@ const GovernanceIndexRoute = GovernanceIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routes/governance/index.lazy').then((d) => d.Route),
 )
+const LoginIndexRoute = LoginIndexRouteImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/login/index.lazy').then((d) => d.Route))
 const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -45,12 +51,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics/': typeof AnalyticsIndexRoute
   '/governance/': typeof GovernanceIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsIndexRoute
   '/governance': typeof GovernanceIndexRoute
+  '/login': typeof LoginIndexRoute
   '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
@@ -58,20 +66,23 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/analytics/': typeof AnalyticsIndexRoute
   '/governance/': typeof GovernanceIndexRoute
+  '/login/': typeof LoginIndexRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analytics/' | '/governance/' | '/projects/'
+  fullPaths: '/' | '/analytics/' | '/governance/' | '/login/' | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analytics' | '/governance' | '/projects'
-  id: '__root__' | '/' | '/analytics/' | '/governance/' | '/projects/'
+  to: '/' | '/analytics' | '/governance' | '/login' | '/projects'
+  id:
+    '__root__' | '/' | '/analytics/' | '/governance/' | '/login/' | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalyticsIndexRoute: typeof AnalyticsIndexRoute
   GovernanceIndexRoute: typeof GovernanceIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
@@ -98,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GovernanceIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof LoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/': {
       id: '/projects/'
       path: '/projects'
@@ -112,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyticsIndexRoute: AnalyticsIndexRoute,
   GovernanceIndexRoute: GovernanceIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport

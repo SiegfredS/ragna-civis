@@ -26,6 +26,8 @@
     "editor.rulers": [120]
   },
 
+  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
+
   "ruff.configuration": "${workspaceFolder}/api/pyproject.toml",
 
   "editor.quickSuggestions": {

@@ -11,7 +11,12 @@ dependencies = [
     "django (>=6.1,<7.0)",
     "django-environ (>=0.14.0,<0.15.0)",
     "psycopg2 (>=2.9.12,<3.0.0)",
-    "pillow (>=12.3.0,<13.0.0)"
+    "pillow (>=12.3.0,<13.0.0)",
+    "djangorestframework (>=3.18.0,<4.0.0)",
+    "django-rest-knox (>=5.1.0,<6.0.0)",
+    "dry-rest-permissions (>=0.1.10,<1.0.0)",
+    "djangorestframework-camel-case (>=1.4.2,<2.0.0)",
+    "django-cors-headers (>=4.9.0,<5.0.0)"
 ]
 
 
@@ -56,7 +61,7 @@ select = [
 plugins = ["mypy_django_plugin.main"]
 
 [[tool.mypy.overrides]]
-module = ["environ"]
+module = ["environ", "knox", "knox.*", "rest_framework", "rest_framework.*"]
 ignore_missing_imports = true
 
 [tool.django-stubs]
