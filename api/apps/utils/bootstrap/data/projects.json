@@ -1,0 +1,130 @@
+{
+  "projects": [
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "title": "Liyue Harbor Market Modernization",
+      "slug": "liyue-harbor-market-modernization",
+      "description": "An original market-access and public-space modernization program.",
+      "status": "active",
+      "start_date": "2025-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "minlin-conservation-authority",
+      "title": "Minlin Mountain Road Rehabilitation",
+      "slug": "minlin-mountain-road-rehabilitation",
+      "description": "An original conservation-informed rehabilitation project.",
+      "status": "planned",
+      "start_date": "2026-04-01",
+      "end_date": null
+    },
+    {
+      "organization": "chihu-rock-merchants-cooperative",
+      "title": "Chihu Rock Public Market Renewal",
+      "slug": "chihu-rock-public-market-renewal",
+      "description": "A completed original pilot for market access and shared facilities.",
+      "status": "completed",
+      "start_date": "2024-03-01",
+      "end_date": "2025-01-31"
+    },
+    {
+      "organization": "mondstadt-civic-services-office",
+      "title": "Springvale Waterworks Rehabilitation",
+      "slug": "springvale-waterworks-rehabilitation",
+      "description": "An original waterworks renewal program shaped by resident feedback.",
+      "status": "active",
+      "start_date": "2025-06-01",
+      "end_date": null
+    },
+    {
+      "organization": "mondstadt-civic-services-office",
+      "title": "Mondstadt Community Services Renewal",
+      "slug": "mondstadt-community-services-renewal",
+      "description": "An original program improving access to shared civic services.",
+      "status": "planned",
+      "start_date": "2026-05-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-department-of-public-works",
+      "title": "Narrows Transit Rehabilitation",
+      "slug": "narrows-transit-rehabilitation",
+      "description": "An original phased repair and accessibility program.",
+      "status": "active",
+      "start_date": "2025-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "title": "Gotham River Cleanup Program",
+      "slug": "gotham-river-cleanup-program",
+      "description": "An original river cleanup and public-waterfront recovery program.",
+      "status": "planned",
+      "start_date": "2026-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-department-of-public-works",
+      "title": "Old Gotham Streetlight Modernization",
+      "slug": "old-gotham-streetlight-modernization",
+      "description": "An original streetlight reliability and pedestrian-safety project.",
+      "status": "active",
+      "start_date": "2025-04-15",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "title": "Doomstadt Rail Expansion",
+      "slug": "doomstadt-rail-expansion",
+      "description": "An original ministry-led rail-capacity project.",
+      "status": "active",
+      "start_date": "2025-01-15",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-central-government",
+      "title": "Latverian National Records Modernization",
+      "slug": "latverian-national-records-modernization",
+      "description": "An original program improving records access and request processing.",
+      "status": "planned",
+      "start_date": "2026-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "title": "Doomstadt Waterworks Rehabilitation",
+      "slug": "doomstadt-waterworks-rehabilitation",
+      "description": "An original municipal waterworks rehabilitation project.",
+      "status": "planned",
+      "start_date": "2026-06-01",
+      "end_date": null
+    },
+    {
+      "organization": "wayne-foundation",
+      "title": "Gotham Community Lighting Partnership",
+      "slug": "gotham-community-lighting-partnership",
+      "description": "An original community-safety lighting partnership for neighborhood routes.",
+      "status": "active",
+      "start_date": "2025-05-01",
+      "end_date": null
+    },
+    {
+      "organization": "metropolis-city-government",
+      "title": "Metropolis Public Transit Modernization",
+      "slug": "metropolis-public-transit-modernization",
+      "description": "An original modernization program for accessible public transit service.",
+      "status": "active",
+      "start_date": "2025-07-01",
+      "end_date": null
+    },
+    {
+      "organization": "metropolis-city-government",
+      "title": "Metropolis Open Civic Data Initiative",
+      "slug": "metropolis-open-civic-data-initiative",
+      "description": "An original initiative for clear public datasets and service-status reporting.",
+      "status": "planned",
+      "start_date": "2026-03-01",
+      "end_date": null
+    }
+  ]
+}

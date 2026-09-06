@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "username": "ningguang",
+      "email": "ningguang@liyue.com",
+      "first_name": "Ningguang",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "keqing",
+      "email": "keqing@liyue.com",
+      "first_name": "Keqing",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "ganyu",
+      "email": "ganyu@liyue.com",
+      "first_name": "Ganyu",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "jean",
+      "email": "jean@mondstadt.com",
+      "first_name": "Jean",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "kaeya",
+      "email": "kaeya@mondstadt.com",
+      "first_name": "Kaeya",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "amber",
+      "email": "amber@mondstadt.com",
+      "first_name": "Amber",
+      "middle_name": "",
+      "last_name": ""
+    },
+    {
+      "username": "james_gordon",
+      "email": "james.gordon@gotham.com",
+      "first_name": "James",
+      "middle_name": "",
+      "last_name": "Gordon"
+    },
+    {
+      "username": "bruce_wayne",
+      "email": "bruce.wayne@gotham.com",
+      "first_name": "Bruce",
+      "middle_name": "",
+      "last_name": "Wayne"
+    },
+    {
+      "username": "clark_kent",
+      "email": "clark.kent@metropolis.com",
+      "first_name": "Clark",
+      "middle_name": "",
+      "last_name": "Kent"
+    },
+    {
+      "username": "victor_von_doom",
+      "email": "victor.von.doom@latveria.com",
+      "first_name": "Victor",
+      "middle_name": "von",
+      "last_name": "Doom"
+    },
+    {
+      "username": "mira_solen",
+      "email": "mira.solen@liyue.com",
+      "first_name": "Mira",
+      "middle_name": "",
+      "last_name": "Solen"
+    },
+    {
+      "username": "rowan_sable",
+      "email": "rowan.sable@gotham.com",
+      "first_name": "Rowan",
+      "middle_name": "",
+      "last_name": "Sable"
+    },
+    {
+      "username": "sana_iver",
+      "email": "sana.iver@gotham.com",
+      "first_name": "Sana",
+      "middle_name": "",
+      "last_name": "Iver"
+    },
+    {
+      "username": "irena_varek",
+      "email": "irena.varek@latveria.com",
+      "first_name": "Irena",
+      "middle_name": "",
+      "last_name": "Varek"
+    }
+  ]
+}

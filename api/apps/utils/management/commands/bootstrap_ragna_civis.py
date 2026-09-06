@@ -6,6 +6,8 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from apps.utils.bootstrap.loader import load_bootstrap_data
+from apps.utils.bootstrap.utils.civic_assistant.create_prompt_groups import create_prompt_groups
+from apps.utils.bootstrap.utils.civic_assistant.create_prompts import create_prompts
 from apps.utils.bootstrap.utils.governance.create_governance_bodies import create_governance_bodies
 from apps.utils.bootstrap.utils.governance.create_governance_position_assignments import (
     create_governance_position_assignments,
@@ -50,6 +52,8 @@ class Command(BaseCommand):
         self._create_governance_positions(data)
         self._create_governance_position_assignments(data)
         self._create_projects(data)
+        self._create_prompts(data)
+        self._create_prompt_groups(data)
 
         self.stdout.write(
             self.style.SUCCESS("Ragna Civis bootstrap completed successfully."),
@@ -96,6 +100,18 @@ class Command(BaseCommand):
 
         with self._bootstrap_step("projects"):
             create_projects(project_data)
+
+    def _create_prompts(self, data: dict[str, Any]) -> None:
+        prompt_data = data.get("prompts", [])
+
+        with self._bootstrap_step("prompts"):
+            create_prompts(prompt_data)
+
+    def _create_prompt_groups(self, data: dict[str, Any]) -> None:
+        prompt_group_data = data.get("prompt_groups", [])
+
+        with self._bootstrap_step("prompt groups"):
+            create_prompt_groups(prompt_group_data)
 
     @contextmanager
     def _bootstrap_step(self, name: str) -> Generator[None, None, None]:

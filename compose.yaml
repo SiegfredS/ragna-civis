@@ -24,6 +24,7 @@ services:
     env_file:
       - ./api/.env
     environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-ragna}:${POSTGRES_PASSWORD:-ragna}@postgres:5432/${POSTGRES_DB:-ragna}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000}
     volumes:
       - ./api:/app

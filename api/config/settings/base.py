@@ -53,6 +53,7 @@ LOCAL_APPS = [
     "apps.organizations",
     "apps.governance",
     "apps.projects",
+    "apps.civic_assistant",
     # for management commands
     "apps.utils",
 ]
