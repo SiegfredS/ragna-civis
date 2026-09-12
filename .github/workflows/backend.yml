@@ -32,6 +32,8 @@ jobs:
       DJANGO_SECRET_KEY: ci-test-secret-key
       DJANGO_DEBUG: "false"
       DATABASE_URL: postgresql://ragna:ragna@127.0.0.1:5432/ragna
+      OPENAI_API_KEY: ci-test-openai-api-key
+      OPENAI_MODEL: ci-test-openai-model
 
     defaults:
       run:

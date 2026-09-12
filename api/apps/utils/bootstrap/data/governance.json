@@ -1,0 +1,238 @@
+{
+  "governance_bodies": [
+    {
+      "organization": "liyue-qixing",
+      "name": "Liyue Qixing Council",
+      "description": "A simplified governance-body representation of the Qixing.",
+      "body_type": "council"
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "name": "Liyue Harbor Advisory Board",
+      "description": "An original advisory body for market access and harbor operations.",
+      "body_type": "advisory"
+    },
+    {
+      "organization": "knights-of-favonius",
+      "name": "Knights of Favonius Command Council",
+      "description": "A simplified governance body for recognizable Knights leadership titles.",
+      "body_type": "council"
+    },
+    {
+      "organization": "gotham-city-government",
+      "name": "Gotham City Council",
+      "description": "A metropolitan body for district representation and infrastructure oversight.",
+      "body_type": "council"
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "name": "Gotham Waterfront Steering Committee",
+      "description": "An original committee for river recovery and waterfront resilience.",
+      "body_type": "committee"
+    },
+    {
+      "organization": "latverian-central-government",
+      "name": "Latverian Central Council",
+      "description": "A simplified central governance body for the Latverian hierarchy.",
+      "body_type": "council"
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "name": "Latverian Infrastructure Council",
+      "description": "An original ministry-led council for infrastructure oversight.",
+      "body_type": "council"
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "name": "Doomstadt Municipal Council",
+      "description": "An original local council for service coordination.",
+      "body_type": "council"
+    }
+  ],
+  "governance_positions": [
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "Tianquan",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "Yuheng",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "name": "General Secretary",
+      "description": "A simplified representation of Ganyu's secretary role supporting the Qixing."
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "governance_body": "Liyue Harbor Advisory Board",
+      "name": "Market Coordination Chair",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Acting Grand Master",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Cavalry Captain",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "name": "Outrider",
+      "description": "Canonical title used as a governance position."
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "name": "Mayor",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "name": "Police Commissioner",
+      "description": "Canonical occupation placed here only as a model simplification."
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "governance_body": "Gotham Waterfront Steering Committee",
+      "name": "Waterfront Resilience Chair",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "latverian-central-government",
+      "governance_body": "Latverian Central Council",
+      "name": "Head of State",
+      "description": "A simplified position for Latveria's canonical ruler."
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "governance_body": "Latverian Infrastructure Council",
+      "name": "Infrastructure Commissioner",
+      "description": "An original Ragna Civis role."
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "governance_body": "Doomstadt Municipal Council",
+      "name": "Municipal Administrator",
+      "description": "An original Ragna Civis role."
+    }
+  ],
+  "governance_position_assignments": [
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "Tianquan",
+      "user": "ningguang",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "Yuheng",
+      "user": "keqing",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-qixing",
+      "governance_body": "Liyue Qixing Council",
+      "position": "General Secretary",
+      "user": "ganyu",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "liyue-harbor-commerce-council",
+      "governance_body": "Liyue Harbor Advisory Board",
+      "position": "Market Coordination Chair",
+      "user": "mira_solen",
+      "start_date": "2025-02-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Acting Grand Master",
+      "user": "jean",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Cavalry Captain",
+      "user": "kaeya",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "knights-of-favonius",
+      "governance_body": "Knights of Favonius Command Council",
+      "position": "Outrider",
+      "user": "amber",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "position": "Mayor",
+      "user": "rowan_sable",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-city-government",
+      "governance_body": "Gotham City Council",
+      "position": "Police Commissioner",
+      "user": "james_gordon",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "gotham-waterfront-authority",
+      "governance_body": "Gotham Waterfront Steering Committee",
+      "position": "Waterfront Resilience Chair",
+      "user": "sana_iver",
+      "start_date": "2025-03-01",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-central-government",
+      "governance_body": "Latverian Central Council",
+      "position": "Head of State",
+      "user": "victor_von_doom",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "latverian-ministry-of-infrastructure",
+      "governance_body": "Latverian Infrastructure Council",
+      "position": "Infrastructure Commissioner",
+      "user": "irena_varek",
+      "start_date": "2025-01-01",
+      "end_date": null
+    },
+    {
+      "organization": "doomstadt-municipal-office",
+      "governance_body": "Doomstadt Municipal Council",
+      "position": "Municipal Administrator",
+      "user": "irena_varek",
+      "start_date": "2025-01-01",
+      "end_date": null
+    }
+  ]
+}

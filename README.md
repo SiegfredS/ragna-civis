@@ -24,6 +24,47 @@ Apply backend migrations after the services are running:
 docker compose exec api python manage.py migrate
 ```
 
+### Troubleshoot local Compose networking
+
+If the API is healthy inside Docker but `http://localhost:8000/health/` is not
+reachable, inspect the rendered configuration and live container state before
+changing application settings:
+
+```bash
+docker compose config
+docker compose ps -a
+docker compose port api 8000
+docker compose ls
+docker network inspect ragna-civis_default
+docker compose exec api getent hosts postgres
+docker compose exec api cat /etc/resolv.conf
+```
+
+The API should show a publication such as `0.0.0.0:8000`, and the API and
+Postgres containers should both be attached to `ragna-civis_default`. The
+Compose service hostname is `postgres`; do not change the container database
+URL to `localhost`.
+
+`BACKEND_PORT` is used when Compose renders the host-port mapping. Compose
+reads it from the shell or a repository-root `.env`; values in `api/.env` are
+loaded into the API container and do not control host-port interpolation.
+
+If the configuration is correct but the containers or network have stale
+runtime state, recreate only the services without removing the database volume:
+
+```bash
+docker compose up -d --force-recreate api postgres web
+```
+
+Then verify the API, DNS, and Django configuration:
+
+```bash
+curl http://localhost:8000/health/
+docker compose exec api getent hosts postgres
+docker compose exec api python manage.py migrate
+docker compose exec api python manage.py check
+```
+
 Stop the local stack with:
 
 ```bash

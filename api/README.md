@@ -24,6 +24,12 @@ docker compose exec api python manage.py migrate
 
 `CORS_ALLOWED_ORIGINS` controls browser origins permitted to call the API. The Compose development default permits the web application at `http://localhost:3000`; configure production origins explicitly.
 
+Compose serves the backend with Uvicorn through `config.asgi:application`; the Civic Assistant streaming endpoint depends on this ASGI runtime. Use the existing Compose command rather than starting a second local server.
+
+`OPENAI_API_KEY` and `OPENAI_MODEL` are required backend configuration. Django raises an `ImproperlyConfigured` error during startup when either variable is missing or blank.
+
+The Civic Assistant timeout and completion-token settings are optional; if omitted or blank, Django logs a warning and uses the defaults in the settings module.
+
 Stop the local stack with `docker compose down`. PostgreSQL data is stored in the named `ragna-postgres-data` volume.
 
 ## Backend checks

@@ -16,6 +16,8 @@ from pathlib import Path
 
 import environ
 
+from .utils import get_env_with_default, get_required_env
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 APPS_DIR = BASE_DIR / "apps"
@@ -53,6 +55,7 @@ LOCAL_APPS = [
     "apps.organizations",
     "apps.governance",
     "apps.projects",
+    "apps.civic_assistant",
     # for management commands
     "apps.utils",
 ]
@@ -61,6 +64,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework",
     "knox",
+    "django_extensions",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -151,6 +155,21 @@ MAILERS = {
 
 # Custom Configurations
 
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": env.str("DJANGO_LOG_LEVEL", default="INFO").upper(),
+    },
+}
+
 # User Model
 AUTH_USER_MODEL = "users.User"
 
@@ -185,3 +204,17 @@ REST_KNOX = {
     "AUTO_REFRESH": True,
     "AUTO_REFRESH_MAX_TTL": timedelta(days=30),
 }
+
+
+# LLM
+OPENAI_API_KEY = get_required_env("OPENAI_API_KEY")
+
+OPENAI_MODEL = get_required_env("OPENAI_MODEL")
+
+CIVIC_ASSISTANT_MODEL_TIMEOUT_SECONDS = get_env_with_default(env.int, "CIVIC_ASSISTANT_MODEL_TIMEOUT_SECONDS", 30)
+
+CIVIC_ASSISTANT_MODEL_MAX_COMPLETION_TOKENS = get_env_with_default(
+    env.int,
+    "CIVIC_ASSISTANT_MODEL_MAX_COMPLETION_TOKENS",
+    1024,
+)
