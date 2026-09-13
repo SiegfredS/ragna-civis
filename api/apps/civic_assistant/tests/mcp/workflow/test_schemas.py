@@ -2,26 +2,29 @@ import pytest
 from pydantic import ValidationError
 
 from apps.civic_assistant.mcp.workflow.schemas import (
+    OrganizationOverviewAmbiguousEvidence,
     OrganizationOverviewEvidence,
+    OrganizationOverviewNotFoundEvidence,
     OrganizationOverviewToolArguments,
+    organization_overview_result_adapter,
 )
 from apps.organizations.queries.overview import ORGANIZATION_OVERVIEW_DESCRIPTION_MAX_LENGTH
 
 
 class TestOrganizationOverviewToolArguments:
-    def test_accepts_a_valid_slug(self):
-        result = OrganizationOverviewToolArguments.model_validate({"slug": "doh"})
+    def test_accepts_a_valid_identifier(self):
+        result = OrganizationOverviewToolArguments.model_validate({"identifier": "Liyue Qixing"})
 
-        assert result.slug == "doh"
+        assert result.identifier == "Liyue Qixing"
 
-    @pytest.mark.parametrize("slug", ["", "a" * 256, "has spaces", "has/slash", "has.dot"])
-    def test_rejects_invalid_slug(self, slug):
+    @pytest.mark.parametrize("identifier", ["", " ", "a" * 256])
+    def test_rejects_invalid_identifier(self, identifier):
         with pytest.raises(ValidationError):
-            OrganizationOverviewToolArguments.model_validate({"slug": slug})
+            OrganizationOverviewToolArguments.model_validate({"identifier": identifier})
 
     def test_rejects_unexpected_fields(self):
         with pytest.raises(ValidationError):
-            OrganizationOverviewToolArguments.model_validate({"slug": "doh", "caller_user_id": 1})
+            OrganizationOverviewToolArguments.model_validate({"identifier": "doh", "caller_user_id": 1})
 
 
 class TestOrganizationOverviewEvidence:
@@ -50,3 +53,15 @@ class TestOrganizationOverviewEvidence:
 
         with pytest.raises(ValidationError):
             OrganizationOverviewEvidence.model_validate(payload)
+
+
+class TestOrganizationOverviewResultEvidence:
+    def test_accepts_controlled_ambiguous_result(self):
+        result = organization_overview_result_adapter.validate_python({"status": "ambiguous"})
+
+        assert isinstance(result, OrganizationOverviewAmbiguousEvidence)
+
+    def test_accepts_controlled_not_found_result(self):
+        result = organization_overview_result_adapter.validate_python({"status": "not_found"})
+
+        assert isinstance(result, OrganizationOverviewNotFoundEvidence)

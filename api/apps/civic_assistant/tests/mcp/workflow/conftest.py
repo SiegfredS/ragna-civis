@@ -37,6 +37,7 @@ def run_sync_graph_nodes_without_worker_threads(monkeypatch):
 
 def make_organization_payload(slug: str) -> dict[str, Any]:
     return {
+        "status": "ok",
         "slug": slug,
         "name": f"{slug.upper()} Organization",
         "description": f"A bounded overview for {slug}.",
@@ -45,10 +46,10 @@ def make_organization_payload(slug: str) -> dict[str, Any]:
     }
 
 
-def make_organization_tool_call(slug: str, tool_call_id: str) -> dict[str, Any]:
+def make_organization_tool_call(identifier: str, tool_call_id: str) -> dict[str, Any]:
     return {
         "name": "get_organization_overview",
-        "args": {"slug": slug},
+        "args": {"identifier": identifier},
         "id": tool_call_id,
         "type": "tool_call",
     }

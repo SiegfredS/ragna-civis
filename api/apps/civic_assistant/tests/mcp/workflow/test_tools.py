@@ -20,10 +20,10 @@ class TestCreateOrganizationOverviewTool:
         mcp_client.call_tool.return_value = mcp_result(structured_content=payload)
         tool = create_organization_overview_tool(client=mcp_client)
 
-        result = asyncio.run(tool.ainvoke({"slug": "doh"}))
+        result = asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
-        assert json.loads(result) == {"status": "ok", "organization": payload}
-        mcp_client.call_tool.assert_awaited_once_with("get_organization_overview", {"slug": "doh"})
+        assert json.loads(result) == payload
+        mcp_client.call_tool.assert_awaited_once_with("get_organization_overview", {"identifier": "doh"})
 
     def test_supports_multiple_sequential_calls(self, mcp_client, organization_payload):
         mcp_client.call_tool.side_effect = [
@@ -40,17 +40,26 @@ class TestCreateOrganizationOverviewTool:
             )
         )
 
-        assert [json.loads(result)["organization"]["slug"] for result in results] == ["doh", "deped"]
-        assert mcp_client.call_tool.await_args_list[0].args == ("get_organization_overview", {"slug": "doh"})
-        assert mcp_client.call_tool.await_args_list[1].args == ("get_organization_overview", {"slug": "deped"})
+        assert [json.loads(result)["slug"] for result in results] == ["doh", "deped"]
+        assert mcp_client.call_tool.await_args_list[0].args == ("get_organization_overview", {"identifier": "doh"})
+        assert mcp_client.call_tool.await_args_list[1].args == ("get_organization_overview", {"identifier": "deped"})
 
     def test_returns_only_unavailable_for_an_error_result(self, mcp_client):
         mcp_client.call_tool.return_value = mcp_result(is_error=True)
         tool = create_organization_overview_tool(client=mcp_client)
 
-        result = asyncio.run(tool.ainvoke({"slug": "doh"}))
+        result = asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
         assert result == '{"status":"unavailable"}'
+
+    @pytest.mark.parametrize("status", ["ambiguous", "not_found"])
+    def test_returns_controlled_resolution_results(self, mcp_client, status):
+        mcp_client.call_tool.return_value = mcp_result(structured_content={"status": status})
+        tool = create_organization_overview_tool(client=mcp_client)
+
+        result = asyncio.run(tool.ainvoke({"identifier": "liyue"}))
+
+        assert result == f'{{"status":"{status}"}}'
 
     def test_does_not_leak_mcp_error_text(self, mcp_client):
         mcp_client.call_tool.return_value = mcp_result(
@@ -59,7 +68,7 @@ class TestCreateOrganizationOverviewTool:
         )
         tool = create_organization_overview_tool(client=mcp_client)
 
-        result = asyncio.run(tool.ainvoke({"slug": "doh"}))
+        result = asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
         assert "internal" not in result
         assert "secret" not in result
@@ -71,14 +80,14 @@ class TestCreateOrganizationOverviewTool:
         tool = create_organization_overview_tool(client=mcp_client)
 
         with pytest.raises(CivicAssistantMCPToolError, match="result was invalid"):
-            asyncio.run(tool.ainvoke({"slug": "doh"}))
+            asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
     def test_raises_for_an_mcp_protocol_failure(self, mcp_client):
         mcp_client.call_tool.side_effect = MCPError(code=-32603, message="secret protocol details")
         tool = create_organization_overview_tool(client=mcp_client)
 
         with pytest.raises(CivicAssistantMCPToolError, match="lookup failed") as error_info:
-            asyncio.run(tool.ainvoke({"slug": "doh"}))
+            asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
         assert "secret protocol details" not in str(error_info.value)
 
@@ -94,8 +103,8 @@ class TestCreateOrganizationOverviewTool:
         tool = create_organization_overview_tool(client=mcp_client)
 
         with pytest.raises(CivicAssistantMCPToolError, match="lookup timed out"):
-            asyncio.run(tool.ainvoke({"slug": "doh"}))
+            asyncio.run(tool.ainvoke({"identifier": "doh"}))
 
 
-async def _invoke_tool_twice(tool, first_slug: str, second_slug: str) -> tuple[str, str]:
-    return await tool.ainvoke({"slug": first_slug}), await tool.ainvoke({"slug": second_slug})
+async def _invoke_tool_twice(tool, first_identifier: str, second_identifier: str) -> tuple[str, str]:
+    return await tool.ainvoke({"identifier": first_identifier}), await tool.ainvoke({"identifier": second_identifier})

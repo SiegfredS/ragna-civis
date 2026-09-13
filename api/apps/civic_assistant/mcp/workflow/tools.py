@@ -11,7 +11,10 @@ from apps.civic_assistant.mcp.tools.organizations import (
     ORGANIZATION_OVERVIEW_TOOL_NAME,
 )
 from apps.civic_assistant.mcp.workflow.errors import CivicAssistantMCPToolError
-from apps.civic_assistant.mcp.workflow.schemas import OrganizationOverviewEvidence, OrganizationOverviewToolArguments
+from apps.civic_assistant.mcp.workflow.schemas import (
+    OrganizationOverviewToolArguments,
+    organization_overview_result_adapter,
+)
 
 MCP_TOOL_TIMEOUT_SECONDS = 10
 
@@ -22,9 +25,9 @@ def create_organization_overview_tool(*, client: Client) -> StructuredTool:
     """Adapt the request-local MCP capability for LangChain."""
 
     async def get_organization_overview(
-        slug: str,
+        identifier: str,
     ) -> str:
-        arguments = OrganizationOverviewToolArguments.model_validate({"slug": slug})
+        arguments = OrganizationOverviewToolArguments.model_validate({"identifier": identifier})
 
         try:
             async with asyncio.timeout(MCP_TOOL_TIMEOUT_SECONDS):
@@ -33,9 +36,9 @@ def create_organization_overview_tool(*, client: Client) -> StructuredTool:
                     arguments.model_dump(),
                 )
                 logger.debug(
-                    "Calling Civic Assistant MCP tool %s for slug=%s",
+                    "Calling Civic Assistant MCP tool %s for identifier=%s",
                     ORGANIZATION_OVERVIEW_TOOL_NAME,
-                    slug,
+                    identifier,
                 )
         except TimeoutError as error:
             raise CivicAssistantMCPToolError("The organization overview lookup timed out.") from error
@@ -49,12 +52,12 @@ def create_organization_overview_tool(*, client: Client) -> StructuredTool:
             )
 
         try:
-            overview = OrganizationOverviewEvidence.model_validate(result.structured_content)
+            overview = organization_overview_result_adapter.validate_python(result.structured_content)
 
         except ValidationError as error:
             raise CivicAssistantMCPToolError("The organization overview result was invalid.") from error
 
-        return json.dumps({"status": "ok", "organization": overview.model_dump()}, separators=(",", ":"))
+        return json.dumps(overview.model_dump(), separators=(",", ":"))
 
     # coroutine because we use async function
     structured_tool = StructuredTool.from_function(

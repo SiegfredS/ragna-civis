@@ -2,21 +2,29 @@ from typing import Annotated
 
 from mcp import MCPError
 from mcp.server import MCPServer
-from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import INTERNAL_ERROR, ToolAnnotations
-from pydantic import Field
+from pydantic import Field, StringConstraints
 
 from apps.organizations.queries.overview import (
     OrganizationOverviewCallerUnavailableError,
-    OrganizationOverviewData,
-    OrganizationOverviewNotFoundError,
+    OrganizationOverviewLookupData,
     read_organization_overview,
 )
 
 ORGANIZATION_OVERVIEW_TOOL_NAME = "get_organization_overview"
 ORGANIZATION_OVERVIEW_TOOL_DESCRIPTION = (
-    "Return the Ragna Civis overview for the organization with the exact supplied slug."
+    "Return the Ragna Civis overview for a uniquely resolved organization name, partial name, or slug. "
+    "Do not guess identifiers; use the organization term from the user's request."
 )
+
+OrganizationIdentifier = Annotated[
+    str,
+    StringConstraints(
+        strip_whitespace=True,
+        min_length=1,
+        max_length=255,
+    ),
+]
 
 OrganizationSlug = Annotated[
     str,
@@ -32,14 +40,12 @@ class OrganizationTools:
     def __init__(self, *, caller_user_id: int) -> None:
         self.caller_user_id = caller_user_id
 
-    def get_organization_overview(self, slug: OrganizationSlug) -> OrganizationOverviewData:
+    def get_organization_overview(self, identifier: OrganizationIdentifier) -> OrganizationOverviewLookupData:
         try:
             return read_organization_overview(
                 caller_user_id=self.caller_user_id,
-                slug=slug,
+                identifier=identifier,
             )
-        except OrganizationOverviewNotFoundError as error:
-            raise ToolError(f"No organization exists with slug {slug!r}.") from error
         except OrganizationOverviewCallerUnavailableError as error:
             raise MCPError(
                 code=INTERNAL_ERROR,

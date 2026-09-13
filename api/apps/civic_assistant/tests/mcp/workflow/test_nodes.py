@@ -47,7 +47,7 @@ class TestSelectTool:
                     tool_calls=[
                         {
                             "name": "get_organization_overview",
-                            "args": {"slug": "has spaces"},
+                            "args": {"identifier": ""},
                             "id": "call-1",
                         }
                     ],
@@ -57,14 +57,14 @@ class TestSelectTool:
             (
                 AIMessage(
                     content="",
-                    tool_calls=[{"name": "get_organization_overview", "args": {"slug": "doh"}, "id": None}],
+                    tool_calls=[{"name": "get_organization_overview", "args": {"identifier": "doh"}, "id": None}],
                 ),
                 "without an ID",
             ),
             (
                 AIMessage(
                     content="",
-                    tool_calls=[{"name": "get_organization_overview", "args": {"slug": "doh"}, "id": " "}],
+                    tool_calls=[{"name": "get_organization_overview", "args": {"identifier": "doh"}, "id": " "}],
                 ),
                 "without an ID",
             ),
@@ -72,8 +72,8 @@ class TestSelectTool:
                 AIMessage(
                     content="",
                     tool_calls=[
-                        {"name": "get_organization_overview", "args": {"slug": "doh"}, "id": "duplicate"},
-                        {"name": "get_organization_overview", "args": {"slug": "deped"}, "id": "duplicate"},
+                        {"name": "get_organization_overview", "args": {"identifier": "doh"}, "id": "duplicate"},
+                        {"name": "get_organization_overview", "args": {"identifier": "deped"}, "id": "duplicate"},
                     ],
                 ),
                 "duplicate",
@@ -82,7 +82,7 @@ class TestSelectTool:
                 AIMessage(
                     content="",
                     tool_calls=[
-                        {"name": "get_organization_overview", "args": {"slug": "doh"}, "id": f"call-{i}"}
+                        {"name": "get_organization_overview", "args": {"identifier": "doh"}, "id": f"call-{i}"}
                         for i in range(MAX_TOOL_CALLS_PER_REQUEST + 1)
                     ],
                 ),
@@ -116,7 +116,7 @@ class TestSelectTool:
         response = AIMessage(
             content="private planning",
             tool_calls=[
-                {"name": "get_organization_overview", "args": {"slug": slug}, "id": f"call-{slug}"}
+                {"name": "get_organization_overview", "args": {"identifier": slug}, "id": f"call-{slug}"}
                 for slug in ("doh", "deped", "dilg")
             ],
         )
@@ -134,7 +134,7 @@ class TestSelectTool:
         selection = result.get("selection")
         assert selection is not None
         assert selection.content == ""
-        assert [call["args"]["slug"] for call in selection.tool_calls] == ["doh", "deped", "dilg"]
+        assert [call["args"]["identifier"] for call in selection.tool_calls] == ["doh", "deped", "dilg"]
         assert [call["id"] for call in selection.tool_calls] == ["call-doh", "call-deped", "call-dilg"]
 
     def test_rejects_a_non_ai_message_response(self, civic_prompt_snapshot):
@@ -192,9 +192,9 @@ class TestRoutingAndLookup:
             "call-dilg",
         ]
         assert [call.args[0] for call in overview_tool.ainvoke.await_args_list] == [
-            {"slug": "doh"},
-            {"slug": "deped"},
-            {"slug": "dilg"},
+            {"identifier": "doh"},
+            {"identifier": "deped"},
+            {"identifier": "dilg"},
         ]
 
     @pytest.mark.parametrize(

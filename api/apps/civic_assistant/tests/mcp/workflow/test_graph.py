@@ -28,8 +28,8 @@ def build_graph(model, mcp_client, prompts):
 def configure_mcp_client(mcp_client, payloads):
     async def call_tool(name, arguments):
         return SimpleNamespace(
-            structured_content=payloads[arguments["slug"]],
-            is_error=payloads[arguments["slug"]] is None,
+            structured_content=payloads[arguments["identifier"]],
+            is_error=payloads[arguments["identifier"]] is None,
         )
 
     mcp_client.call_tool.side_effect = call_tool
@@ -80,7 +80,7 @@ class TestCivicAssistantGraph:
         events = asyncio.run(collect_events(graph, "Tell me about DOH."))
 
         assert events == [{"type": "delta", "text": "final answer"}]
-        mcp_client.call_tool.assert_awaited_once_with("get_organization_overview", {"slug": "doh"})
+        mcp_client.call_tool.assert_awaited_once_with("get_organization_overview", {"identifier": "doh"})
         assert model.calls[0][0] == SystemMessage(content=civic_prompt_snapshot.answer)
         assert model.calls[0][1] == HumanMessage(content="Tell me about DOH.")
         selection = model.calls[0][2]
@@ -90,10 +90,27 @@ class TestCivicAssistantGraph:
         evidence = model.calls[0][3]
         assert isinstance(evidence, ToolMessage)
         assert isinstance(evidence.content, str)
-        assert json.loads(evidence.content) == {
-            "status": "ok",
-            "organization": make_organization_payload("doh"),
-        }
+        assert json.loads(evidence.content) == make_organization_payload("doh")
+
+    def test_name_lookup_reaches_final_generation_without_a_slug(self, mcp_client, civic_prompt_snapshot):
+        configure_mcp_client(mcp_client, {"liyue": make_organization_payload("liyue-qixing")})
+        model = FakeFinalModel(
+            AIMessage(
+                content="private selection reasoning",
+                tool_calls=[make_organization_tool_call("liyue", "call-liyue")],
+            ),
+            [AIMessageChunk(content="final answer")],
+        )
+        graph = build_graph(
+            model=model,
+            mcp_client=mcp_client,
+            prompts=civic_prompt_snapshot,
+        )
+
+        events = asyncio.run(collect_events(graph, "What is Liyue?"))
+
+        assert events == [{"type": "delta", "text": "final answer"}]
+        mcp_client.call_tool.assert_awaited_once_with("get_organization_overview", {"identifier": "liyue"})
 
     def test_multi_organization_lookup_preserves_order_and_pairing(self, mcp_client, civic_prompt_snapshot):
         slugs = ("doh", "deped", "dilg")
@@ -114,7 +131,7 @@ class TestCivicAssistantGraph:
         events = asyncio.run(collect_events(graph, "Compare DOH, DepEd, and DILG."))
 
         assert events == [{"type": "delta", "text": "comparison"}]
-        assert [call.args[1]["slug"] for call in mcp_client.call_tool.await_args_list] == list(slugs)
+        assert [call.args[1]["identifier"] for call in mcp_client.call_tool.await_args_list] == list(slugs)
         final_messages = model.calls[0]
         tool_messages = [message for message in final_messages[3:] if isinstance(message, ToolMessage)]
         assert [message.tool_call_id for message in tool_messages] == [

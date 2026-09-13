@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 from mcp import Client, MCPError
-from mcp.types import INTERNAL_ERROR, TextContent
+from mcp.types import INTERNAL_ERROR
 
 from apps.civic_assistant.mcp.client import create_civic_assistant_mcp_client
 from apps.organizations.tests.factories import OrganizationFactory
@@ -26,15 +26,15 @@ async def list_client_tools(client: Client):
         return await client.list_tools()
 
 
-async def call_client_tool(client: Client, slug: str):
+async def call_client_tool(client: Client, identifier: str):
     async with client:
-        return await client.call_tool("get_organization_overview", {"slug": slug})
+        return await client.call_tool("get_organization_overview", {"identifier": identifier})
 
 
-async def call_client_tool_expect_mcp_error(client: Client, slug: str) -> MCPError:
+async def call_client_tool_expect_mcp_error(client: Client, identifier: str) -> MCPError:
     async with client:
         with pytest.raises(MCPError) as error_info:
-            await client.call_tool("get_organization_overview", {"slug": slug})
+            await client.call_tool("get_organization_overview", {"identifier": identifier})
         return error_info.value
 
 
@@ -67,13 +67,26 @@ class TestCivicAssistantMCPClient:
         result = asyncio.run(call_client_tool(client, organization.slug))
 
         assert result.is_error is False
-        assert result.structured_content == {
-            "slug": organization.slug,
-            "name": organization.name,
-            "description": organization.description,
-            "organization_type": organization.organization_type,
-            "description_truncated": False,
-        }
+        assert result.structured_content["slug"] == organization.slug
+
+    def test_resolves_a_unique_partial_name(self, user):
+        organization = OrganizationFactory(name="Liyue Qixing", slug="liyue-qixing")
+        client = create_civic_assistant_mcp_client(caller_user_id=user.pk)
+
+        result = asyncio.run(call_client_tool(client, "liyue"))
+
+        assert result.is_error is False
+        assert result.structured_content["slug"] == organization.slug
+
+    def test_returns_ambiguous_for_multiple_partial_name_matches(self, user):
+        OrganizationFactory(name="Liyue Qixing", slug="liyue-qixing")
+        OrganizationFactory(name="Liyue Harbor", slug="liyue-harbor")
+        client = create_civic_assistant_mcp_client(caller_user_id=user.pk)
+
+        result = asyncio.run(call_client_tool(client, "liyue"))
+
+        assert result.is_error is False
+        assert result.structured_content == {"status": "ambiguous"}
 
     def test_separate_clients_retain_their_callers(self):
         active_user = UserFactory()
@@ -97,13 +110,10 @@ class TestCivicAssistantMCPClient:
 
         assert error.error.code == INTERNAL_ERROR
 
-    def test_missing_organization_is_a_tool_error_result(self, user):
+    def test_missing_organization_returns_a_controlled_result(self, user):
         client = create_civic_assistant_mcp_client(caller_user_id=user.pk)
 
         result = asyncio.run(call_client_tool(client, "missing-organization"))
-        error_content = result.content[0]
 
-        assert result.is_error is True
-        assert result.structured_content is None
-        assert isinstance(error_content, TextContent)
-        assert "No organization exists with slug 'missing-organization'." in error_content.text
+        assert result.is_error is False
+        assert result.structured_content == {"status": "not_found"}
