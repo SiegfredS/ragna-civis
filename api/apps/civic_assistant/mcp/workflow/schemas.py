@@ -1,6 +1,8 @@
-from pydantic import BaseModel, ConfigDict, Field
+from typing import Literal
 
-from apps.civic_assistant.mcp.tools.organizations import OrganizationSlug
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
+
+from apps.civic_assistant.mcp.tools.organizations import OrganizationIdentifier, OrganizationSlug
 from apps.organizations.queries.overview import ORGANIZATION_OVERVIEW_DESCRIPTION_MAX_LENGTH
 
 
@@ -12,7 +14,7 @@ class OrganizationOverviewToolArguments(BaseModel):
         strict=True,
     )
 
-    slug: OrganizationSlug
+    identifier: OrganizationIdentifier
 
 
 class OrganizationOverviewEvidence(BaseModel):
@@ -23,6 +25,7 @@ class OrganizationOverviewEvidence(BaseModel):
         strict=True,
     )
 
+    status: Literal["ok"]
     slug: OrganizationSlug
     name: str = Field(
         min_length=1,
@@ -31,3 +34,28 @@ class OrganizationOverviewEvidence(BaseModel):
     description: str = Field(max_length=ORGANIZATION_OVERVIEW_DESCRIPTION_MAX_LENGTH)
     organization_type: str
     description_truncated: bool
+
+
+class OrganizationOverviewAmbiguousEvidence(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+        strict=True,
+    )
+
+    status: Literal["ambiguous"]
+
+
+class OrganizationOverviewNotFoundEvidence(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+        strict=True,
+    )
+
+    status: Literal["not_found"]
+
+
+organization_overview_result_adapter: TypeAdapter[
+    OrganizationOverviewEvidence | OrganizationOverviewAmbiguousEvidence | OrganizationOverviewNotFoundEvidence
+] = TypeAdapter(
+    OrganizationOverviewEvidence | OrganizationOverviewAmbiguousEvidence | OrganizationOverviewNotFoundEvidence
+)

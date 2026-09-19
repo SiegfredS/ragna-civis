@@ -1,5 +1,6 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 
+import { CivicAssistantRoot } from "@/components/civic-assistant/CivicAssistantRoot";
 import { AppHeader } from "@/components/navigation/AppHeader";
 import { AppSidebar } from "@/components/navigation/AppSidebar";
 
@@ -9,16 +10,18 @@ export const Route = createRootRoute({
 
 function RootLayout() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <AppHeader />
+    <CivicAssistantRoot>
+      <div className="flex min-h-screen flex-col bg-background">
+        <AppHeader />
 
-      <div className="flex flex-1">
-        <AppSidebar />
+        <div className="flex flex-1">
+          <AppSidebar />
 
-        <main className="min-w-0 flex-1 p-6 lg:p-8">
-          <Outlet />
-        </main>
+          <main className="min-w-0 flex-1 p-6 lg:p-8">
+            <Outlet />
+          </main>
+        </div>
       </div>
-    </div>
+    </CivicAssistantRoot>
   );
 }

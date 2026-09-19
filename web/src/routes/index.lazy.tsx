@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link, createLazyFileRoute } from "@tanstack/react-router";
 
+import { getStoredAuthToken, meQueryOptions } from "@/api/auth";
 import { buttonVariants } from "@/components/ui/button";
 
 export const Route = createLazyFileRoute("/")({
@@ -7,6 +9,12 @@ export const Route = createLazyFileRoute("/")({
 });
 
 function OverviewPage() {
+  const token = getStoredAuthToken();
+  const { data: me } = useQuery({
+    ...meQueryOptions(),
+    enabled: Boolean(token),
+  });
+
   return (
     <section className="mx-auto flex min-h-[calc(100vh-10rem)] max-w-3xl items-center">
       <div className="space-y-6">
@@ -24,9 +32,11 @@ function OverviewPage() {
         </p>
 
         <div className="flex flex-wrap gap-3">
-          <Link to="/login" className={buttonVariants({ size: "lg" })}>
-            Sign in
-          </Link>
+          {!me && (
+            <Link to="/login" className={buttonVariants({ size: "lg" })}>
+              Sign in
+            </Link>
+          )}
 
           <Link
             to="/governance"
