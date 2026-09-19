@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
+
+import { buttonVariants } from "@/components/ui/button";
 import {
   SheetContent,
   SheetDescription,
@@ -23,9 +25,12 @@ export function CivicAssistantPanel() {
       </SheetHeader>
       <CivicAssistantChat mode="compact" />
       <SheetFooter className="border-t">
-        <Button type="button" variant="outline" disabled>
+        <Link
+          to="/assistant"
+          className={buttonVariants({ variant: "outline" })}
+        >
           Open full chat
-        </Button>
+        </Link>
       </SheetFooter>
     </SheetContent>
   );

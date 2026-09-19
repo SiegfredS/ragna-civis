@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsIndexRouteImport } from './routes/analytics/index'
+import { Route as AssistantIndexRouteImport } from './routes/assistant/index'
 import { Route as GovernanceIndexRouteImport } from './routes/governance/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
@@ -26,6 +27,13 @@ const AnalyticsIndexRoute = AnalyticsIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/analytics/index.lazy').then((d) => d.Route),
+)
+const AssistantIndexRoute = AssistantIndexRouteImport.update({
+  id: '/assistant/',
+  path: '/assistant/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/assistant/index.lazy').then((d) => d.Route),
 )
 const GovernanceIndexRoute = GovernanceIndexRouteImport.update({
   id: '/governance/',
@@ -50,6 +58,7 @@ const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics/': typeof AnalyticsIndexRoute
+  '/assistant/': typeof AssistantIndexRoute
   '/governance/': typeof GovernanceIndexRoute
   '/login/': typeof LoginIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -57,6 +66,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsIndexRoute
+  '/assistant': typeof AssistantIndexRoute
   '/governance': typeof GovernanceIndexRoute
   '/login': typeof LoginIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -65,22 +75,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/analytics/': typeof AnalyticsIndexRoute
+  '/assistant/': typeof AssistantIndexRoute
   '/governance/': typeof GovernanceIndexRoute
   '/login/': typeof LoginIndexRoute
   '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analytics/' | '/governance/' | '/login/' | '/projects/'
+  fullPaths:
+    | '/'
+    | '/analytics/'
+    | '/assistant/'
+    | '/governance/'
+    | '/login/'
+    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analytics' | '/governance' | '/login' | '/projects'
+  to: '/' | '/analytics' | '/assistant' | '/governance' | '/login' | '/projects'
   id:
-    '__root__' | '/' | '/analytics/' | '/governance/' | '/login/' | '/projects/'
+    | '__root__'
+    | '/'
+    | '/analytics/'
+    | '/assistant/'
+    | '/governance/'
+    | '/login/'
+    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalyticsIndexRoute: typeof AnalyticsIndexRoute
+  AssistantIndexRoute: typeof AssistantIndexRoute
   GovernanceIndexRoute: typeof GovernanceIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
@@ -100,6 +124,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics/'
       preLoaderRoute: typeof AnalyticsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant/': {
+      id: '/assistant/'
+      path: '/assistant'
+      fullPath: '/assistant/'
+      preLoaderRoute: typeof AssistantIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/governance/': {
@@ -129,6 +160,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyticsIndexRoute: AnalyticsIndexRoute,
+  AssistantIndexRoute: AssistantIndexRoute,
   GovernanceIndexRoute: GovernanceIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,

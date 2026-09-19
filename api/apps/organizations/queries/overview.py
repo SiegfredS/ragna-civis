@@ -15,7 +15,6 @@ class OrganizationOverviewData(TypedDict):
     name: str
     description: str
     organization_type: str
-    description_truncated: bool
 
 
 class OrganizationOverviewLookupData(TypedDict):
@@ -93,7 +92,7 @@ def read_organization_overview(
     return {"status": "not_found"}
 
 
-def _organization_overview_data(organization: dict[str, str]) -> OrganizationOverviewLookupData:
+def _organization_overview_data(organization: OrganizationOverviewData) -> OrganizationOverviewLookupData:
     description = organization["description"]
     is_truncated = len(description) > ORGANIZATION_OVERVIEW_DESCRIPTION_MAX_LENGTH
 

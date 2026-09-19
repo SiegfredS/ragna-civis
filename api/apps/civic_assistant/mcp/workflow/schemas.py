@@ -54,6 +54,8 @@ class OrganizationOverviewNotFoundEvidence(BaseModel):
     status: Literal["not_found"]
 
 
-organization_overview_result_adapter = TypeAdapter(
+organization_overview_result_adapter: TypeAdapter[
+    OrganizationOverviewEvidence | OrganizationOverviewAmbiguousEvidence | OrganizationOverviewNotFoundEvidence
+] = TypeAdapter(
     OrganizationOverviewEvidence | OrganizationOverviewAmbiguousEvidence | OrganizationOverviewNotFoundEvidence
 )

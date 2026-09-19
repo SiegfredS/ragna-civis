@@ -43,6 +43,7 @@ export function CivicAssistantProvider({
       message: "",
     },
   });
+  const { reset } = form;
   const activeControllerRef = useRef<AbortController | null>(null);
   const activeRequestIdRef = useRef<string | null>(null);
   const authenticatedUserIdRef = useRef<number | null>(null);
@@ -80,8 +81,8 @@ export function CivicAssistantProvider({
     invalidateActiveRequest();
     setMessages([]);
     setError(null);
-    form.reset();
-  }, [form, invalidateActiveRequest, session.status, sessionUserId]);
+    reset();
+  }, [invalidateActiveRequest, reset, session.status, sessionUserId]);
 
   const submitMessage = useCallback((message: string) => {
     const trimmedMessage = message.trim();
